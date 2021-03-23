@@ -9,23 +9,28 @@ port = int(os.getenv('PORT', '9080'))
 
 @app.route('/')
 def index():
-    return {'data':'Index'}
+    return 'ok'
 
-@app.route('/places',methods=['GET'])
-def places():
-    return {'data':[{'Place':1},{'Place':2}]}
-
-@app.route('/places/<placename>',methods=['GET'])
-def places_params(placename):
-    return {'data':placename}
-
-@app.route('/placesnames',methods=['GET','POST'])
-def places_names():
-    placeid = request.args.get('placeid',default=1)
-    if request.method == 'POST':
-        return {'data':placeid,'POST':True}
+@app.route('/get_certification_2ndfl/<count>',methods=['GET'])
+def get_certification_2ndfl(count):
+    #count = request.args.get('count',default=1)
+    if(int(count) > 3):
+        msg = 'Срок готовности составит ' + str(int(count) * 2) + ' часа(ов)'
     else:
-        return {'data':placeid,'POST':False}
+        msg = 'Срок готовности составит ' + str(int(count) * 1) + ' часа(ов)'
+    return {'data':{'msg_deadline': msg}}
+
+#@app.route('/places/<placename>',methods=['GET'])
+#def places_params(placename):
+#    return {'data':placename}
+#
+#@app.route('/placesnames',methods=['GET','POST'])
+#def places_names():
+#    placeid = request.args.get('placeid',default=1)
+#    if request.method == 'POST':
+#        return {'data':placeid,'POST':True}
+#    else:
+#        return {'data':placeid,'POST':False}
         
 # запуск приложения
 if __name__ == '__main__':
