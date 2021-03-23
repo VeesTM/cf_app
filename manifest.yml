@@ -1,0 +1,13 @@
+applications:
+- name: myexample # обязательное имя
+  path: . # папка с контентом или .
+# будет ли создан для каждого деплоя - уникальная ссылка:
+  random-route: true # cf push --random-route
+# возможность указать билдпак
+  buildpacks:
+  - python_buildpack ## ccf push -b <buildpack>
+# стартовая команда если не указан Procfile
+  command: python server.py ## cf push -c 'python server.py'
+# опциональные лимиты по потреблению сервиса
+  memory: 128M ## cf push -m 128M
+  disk_quota: 512M ## cf push -k 512M
